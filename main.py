@@ -4,6 +4,7 @@ from scripts.data_handler import DataHandler
 from scripts.strategies import SMAStrategy
 from scripts.portfolio import Portfolio
 from scripts.execution_handler import SimulatedExecutionHandler
+from scripts.results import show_results
 import pandas as pd
 import matplotlib.pyplot as plt
 import queue
@@ -66,9 +67,8 @@ if __name__ == "__main__":
     # Run backtest
     results = run_backtest('./backtesting_data/dummy_data2.csv')
 
-    import matplotlib.pyplot as plt
-    results['total'].plot()
-    plt.show()
+    show_results(results)
+
 
 
 
