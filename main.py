@@ -65,7 +65,7 @@ def run_backtest(csv_file):
 
 if __name__ == "__main__":
     # Run backtest
-    results = run_backtest('./backtesting_data/dummy_data2.csv')
+    results = run_backtest('./backtesting_data/btcusd_1-min_data_2025.csv')
 
     show_results(results)
 

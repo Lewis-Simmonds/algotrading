@@ -5,7 +5,7 @@ import pandas as pd
 
 class SMAStrategy:
     """Simple Moving Average Crossover Strategy"""
-    def __init__(self, data_handler, event_queue, short_window=5, long_window=10):
+    def __init__(self, data_handler, event_queue, short_window=50, long_window=200):
         self.data_handler = data_handler
         self.event_queue = event_queue
         self.symbol = data_handler.symbol

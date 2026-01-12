@@ -47,10 +47,24 @@ class Portfolio:
         """Acts on a SignalEvent to generate an Order."""
         if event.type == 'SIGNAL':
             direction = 'BUY' if event.signal_type == 'LONG' else 'SELL'
-            # TODO: Implement position sizing logic
-            quantity = 1 # Fixed quantity for simplicity
 
+            # Get current price
+            latest_bars = self.data_handler.get_latest_bars(n=1)
+            if not latest_bars:
+                 return
+            
+            current_price = latest_bars[0].close
+
+            # Dynamic position sizing: 10% of total portfolio value
+            # TODO: Refactor this into the strategy script and pass a parameter to the event into update_signal
             # TODO: Refine this logic to handle netting
+            position_value = self.current_holdings['total'] * 0.1
+            quantity = round(position_value / current_price, 2)
+
+            if quantity == 0:
+                 print(f"Position size too small to create order for {self.symbol} at price {current_price}")
+                 return
+            
             order = OrderEvent(self.symbol, 'MARKET', quantity, direction)
             print(f"Order created: {direction} {quantity} {self.symbol}")
             self.event_queue.put(order)
