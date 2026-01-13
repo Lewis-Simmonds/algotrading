@@ -56,6 +56,8 @@ def run_backtest(csv_file):
     stats = pd.DataFrame(portfolio.all_holdings)
     stats.set_index('timestamp', inplace=True)
 
+    print(portfolio.all_holdings)
+
     print("\nBacktest Finished.")
     print(f"Final Total Portfolio Value: ${stats['total'][-1]:.2f}")
     print(f"Total Return: {((stats['total'][-1] / stats['total'][0]) - 1) * 100:.2f}%")
